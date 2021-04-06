@@ -26,7 +26,6 @@ export default function Layout({ username, children }) {
               philly-art
             </NavLink>
           </Typography>
-          {username}
         </Toolbar>
       </AppBar>
       <main>{children}</main>

@@ -28,11 +28,6 @@ app.get('/api/artist/:id', async (req, res) => {
   }
 });
 
-app.post('/api/login', (req, res) => {
-  console.log(req.body);
-  res.json({message: 'Hello ' + req.body.user});
-});
-
 app.listen(3001, () => {
   console.log('server started on port 3001');
 });
