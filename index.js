@@ -15,6 +15,19 @@ app.get('/api/artists', async (req, res) => {
   }
 });
 
+app.get('/api/artist/:id', async (req, res) => {
+  try {
+    const response = await fetch(`${API_URL}/artists/${req.params.id}.json`);
+    const json = await response.json();
+    res.json({
+      name: json.head.title,
+      art: json.body.art
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 app.post('/api/login', (req, res) => {
   console.log(req.body);
   res.json({message: 'Hello ' + req.body.user});
