@@ -9,7 +9,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import ArtistsList from './ArtistsList';
-import getArtists from '../../utils/art';
+import { getAll } from '../../utils/artists';
 
 export default function Artists() {
   const [filterInput, setFilterInput] = useState('');
@@ -29,7 +29,7 @@ export default function Artists() {
 
   useEffect(() => {
     (async function () {
-      const data = await getArtists();
+      const data = await getAll();
 
       if (data) {
         setArtists(data.list);
@@ -85,7 +85,10 @@ export default function Artists() {
               ) : null,
           }}
         />
-        <ArtistsList artists={filteredArtists.slice(0, 8)} total={artists.length} />
+        <ArtistsList
+          artists={filteredArtists.slice(0, 8)}
+          total={artists.length}
+        />
       </Container>
     </React.Fragment>
   );
