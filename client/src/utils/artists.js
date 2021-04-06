@@ -1,6 +1,6 @@
 async function getData(route) {
   try {
-    const response = await fetch(`api/${route}`);
+    const response = await fetch(`/api/${route}`);
 
     if (!response.ok) {
       throw new Error(`${response.status}: ${response.statusText}`);
@@ -12,7 +12,12 @@ async function getData(route) {
   }
 }
 
-export default async function getArtists() {
-  return await getData("artists");
+async function getAll() {
+  return await getData('artists');
 }
 
+async function getById(id) {
+  return await getData(`artist/${id}`);
+}
+
+export { getAll, getById };
