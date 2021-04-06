@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Artist from './pages/Artist';
 import Artists from './pages/Artists';
 import Layout from './components/Layout';
 
@@ -49,10 +50,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
-
-function Artist() {
-  return <h2>Artist Name</h2>;
 }
 
 export default App;
