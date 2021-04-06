@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Artists from './pages/Artists';
+import Layout from './components/Layout';
 
 function App() {
-  const classes = useStyles();
   const [user, setUser] = useState();
-
+ 
   useEffect(() => {
     const tempUser = localStorage.getItem('philly-art-user');
     if (tempUser) {
@@ -45,17 +34,25 @@ function App() {
   }, [user]);
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            philly-art
-          </Typography>
-          {user}
-        </Toolbar>
-      </AppBar>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/artist/:id">
+          <Layout username={user}>
+            <Artist />
+          </Layout>
+        </Route>
+        <Route path="/">
+          <Layout username={user}>
+            <Artists />
+          </Layout>
+        </Route>
+      </Switch>
+    </Router>
   );
+}
+
+function Artist() {
+  return <h2>Artist Name</h2>;
 }
 
 export default App;
