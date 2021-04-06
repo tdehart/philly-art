@@ -1,11 +1,18 @@
 const express = require('express');
+const fetch = require('node-fetch');
+const API_URL = 'https://www.philart.net/api';
 
 const app = express();
-
 app.use(express.json());
 
-app.get('/api', (req, res) => {
-  res.json({message: 'Hello world'});
+app.get('/api/artists', async (req, res) => {
+  try {
+    const response = await fetch(`${API_URL}/artists.json`);
+    const json = await response.json();
+    res.json(json.body);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 app.post('/api/login', (req, res) => {
