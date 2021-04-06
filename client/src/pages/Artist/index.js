@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import ArtMap from './ArtMap';
 import { getById } from '../../utils/artists';
 
 const useStyles = makeStyles(theme => ({
@@ -107,6 +108,20 @@ export default function Artist() {
             </Grid>
           ))}
         </Grid>
+        {artist.art.length > 0 && (
+          <Box mt={8}>
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom
+            >
+              Map
+            </Typography>
+            <ArtMap art={artist.art} />
+          </Box>
+        )}
       </Container>
     </>
   );
