@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Pagination from '@material-ui/lab/Pagination';
 import ClearIcon from '@material-ui/icons/Clear';
 import ArtistsList from './ArtistsList';
@@ -13,6 +14,7 @@ import { getAll } from '../../utils/artists';
 const PAGE_SIZE = 10;
 
 export default function Artists() {
+  const [loading, setLoading] = useState(true);
   const [filterInput, setFilterInput] = useState('');
   const [artists, setArtists] = useState([]);
   const [filteredArtists, setFilteredArtists] = useState([]);
@@ -38,6 +40,8 @@ export default function Artists() {
         setArtists(data.list);
         setFilteredArtists(data.list);
       }
+
+      setLoading(false);
     })();
   }, []);
 
@@ -66,6 +70,7 @@ export default function Artists() {
           fullWidth
           label="Filter by name"
           placeholder="Start typing..."
+          disabled={loading}
           value={filterInput}
           onChange={onChange}
           variant="outlined"
@@ -80,15 +85,23 @@ export default function Artists() {
               ) : null,
           }}
         />
-        <ArtistsList artists={filteredArtists.slice(start, end)} />
-        {pageCount > 0 && (
-          <Box mt={2}>
-            <Pagination
-              count={pageCount}
-              page={page}
-              onChange={handlePageChange}
-            />
+        {loading ? (
+          <Box textAlign="center" mt={2}>
+            <CircularProgress />
           </Box>
+        ) : (
+          <>
+            <ArtistsList artists={filteredArtists.slice(start, end)} />
+            {pageCount > 0 && (
+              <Box mt={2}>
+                <Pagination
+                  count={pageCount}
+                  page={page}
+                  onChange={handlePageChange}
+                />
+              </Box>
+            )}
+          </>
         )}
       </Container>
     </React.Fragment>

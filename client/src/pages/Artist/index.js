@@ -6,6 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import ArtMap from './ArtMap';
@@ -45,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Artist() {
   let { id } = useParams();
+  const [loading, setLoading] = useState(true);
   const classes = useStyles();
   const [artist, setArtist] = useState({
     name: '',
@@ -53,13 +55,23 @@ export default function Artist() {
 
   useEffect(() => {
     (async function () {
+      setLoading(true);
+
       const data = await getById(id);
 
       if (data) {
         setArtist(data);
       }
+
+      setLoading(false);
     })();
   }, [id]);
+
+  if (loading) return (
+    <Box textAlign="center" mt={6}>
+      <CircularProgress />
+    </Box>
+  );
 
   return (
     <>
