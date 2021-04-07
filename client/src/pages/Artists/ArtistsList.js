@@ -8,12 +8,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    maxHeight: 400,
+    maxHeight: 500,
     marginTop: theme.spacing(2),
   },
 }));
 
-export default function ArtistsList({ artists, total }) {
+export default function ArtistsList({ artists }) {
   const classes = useStyles();
 
   return (
@@ -37,7 +37,6 @@ export default function ArtistsList({ artists, total }) {
           ))}
         </List>
       </Paper>
-      {/* <Box p={2}>{`${artists.length} of ${total} results`}</Box> */}
     </>
   );
 }

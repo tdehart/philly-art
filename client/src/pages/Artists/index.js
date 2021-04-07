@@ -7,15 +7,20 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import Pagination from '@material-ui/lab/Pagination';
 import ClearIcon from '@material-ui/icons/Clear';
 import ArtistsList from './ArtistsList';
 import { getAll } from '../../utils/artists';
+
+const PAGE_SIZE = 10;
 
 export default function Artists() {
   const [filterInput, setFilterInput] = useState('');
   const [artists, setArtists] = useState([]);
   const [filteredArtists, setFilteredArtists] = useState([]);
+  const [page, setPage] = React.useState(1);
 
+  const handlePageChange = (event, value) => setPage(value);
   const onChange = event => setFilterInput(event.target.value);
   const clearFilter = () => setFilterInput('');
 
@@ -37,6 +42,10 @@ export default function Artists() {
       }
     })();
   }, []);
+
+  const start = (page - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+  const pageCount = Math.ceil(filteredArtists.length / PAGE_SIZE);
 
   return (
     <React.Fragment>
@@ -67,7 +76,7 @@ export default function Artists() {
       </Box>
       <Container maxWidth="xs">
         <TextField
-          id="fiter-artist"
+          id="filter-artist"
           fullWidth
           label="Filter by name"
           placeholder="Start typing..."
@@ -85,10 +94,16 @@ export default function Artists() {
               ) : null,
           }}
         />
-        <ArtistsList
-          artists={filteredArtists.slice(0, 8)}
-          total={artists.length}
-        />
+        <ArtistsList artists={filteredArtists.slice(start, end)} />
+        {pageCount > 0 && (
+          <Box mt={2}>
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handlePageChange}
+            />
+          </Box>
+        )}
       </Container>
     </React.Fragment>
   );
