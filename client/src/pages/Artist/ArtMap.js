@@ -26,6 +26,7 @@ export default function ArtMap({ art }) {
       />
       {markers.map(marker => (
         <Marker
+          key={marker.name}
           position={marker.position}
           icon={
             new Icon({

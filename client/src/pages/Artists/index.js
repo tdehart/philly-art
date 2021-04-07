@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -61,18 +59,6 @@ export default function Artists() {
             Browse public art in Philadelphia
           </Typography>
         </Container>
-        <Grid container spacing={2} justify="center">
-          <Grid item>
-            <Button variant="contained" color="primary">
-              All Artists
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="outlined" color="primary" disabled>
-              Favorites
-            </Button>
-          </Grid>
-        </Grid>
       </Box>
       <Container maxWidth="xs">
         <TextField
