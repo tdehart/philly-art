@@ -40,6 +40,7 @@ export default function ArtMap({ art }) {
           <Marker
             key={marker.name}
             position={marker.position}
+            alt={marker.name}
             icon={
               new Icon({
                 iconUrl: markerIconPng,

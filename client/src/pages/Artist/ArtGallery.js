@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ArtGallery({art}) {
+export default function ArtGallery({ art }) {
   const classes = useStyles();
 
   return (
